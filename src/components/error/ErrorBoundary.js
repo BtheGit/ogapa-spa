@@ -10,7 +10,7 @@ export class ErrorBoundary extends React.Component {
     }
 
     render() {
-        return this.state.hasError ? <Error /> : this.props.children;
+        return this.state.hasError ? <div>Error</div> : this.props.children;
     }
 };
 
