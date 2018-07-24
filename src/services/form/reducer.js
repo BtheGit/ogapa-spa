@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
                 [action.payload.field]: action.payload.value,
             };
         case CLEAR_FORM:
-            return state;
+            return initialState;
         default:
             return state;
     }

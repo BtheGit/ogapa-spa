@@ -10,7 +10,7 @@ import HomePage from './views/home_page/HomePage';
 const AppRouter = ({ history }) => (
   <Router history={ history }>
     <Switch>
-        <Route exact path="/search:id" component={ SearchPage } />
+        <Route exact path="/search" component={ SearchPage } />
         <Route path="*" component={ HomePage } /> 
     </Switch>
   </Router>
