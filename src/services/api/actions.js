@@ -3,3 +3,4 @@ export const FETCH_ERROR = 'FETCH_ERROR';
 
 export const startFetch = () => ({});
 export const fetchError = () => ({});
+export const submitSearch = () => ({}); // STUB pre-ajax

@@ -2,8 +2,7 @@ import React from 'react';
 import ResultTile from './ResultTile';
 
 export const Results = () => (
-    <div>
-        <p>Results</p>
+    <div className="results__container">
         <ResultTile />
     </div>
 )

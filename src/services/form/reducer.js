@@ -10,7 +10,10 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case UPDATE_FORM_FIELD:
-            return state;
+            return {
+                ...state,
+                [action.payload.field]: action.payload.value,
+            };
         case CLEAR_FORM:
             return state;
         default:
