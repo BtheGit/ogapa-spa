@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { keyHandler } from '../../utilities';
+import './Pager.css';
 
 const formatPagerArray = (total, current) => {
     const pagesFromStart = current;
