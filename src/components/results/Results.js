@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 export const Results = ({ results }) => (
     <div className="results__container">
-    { 
-        results.map((result) => <ResultTile key={ result.uri } title={ result.uri } />) 
+        { 
+            results.map((result) => <ResultTile key={ result.uri } title={ result.uri } id={ result.uri } />) 
         }
     </div>
 )
