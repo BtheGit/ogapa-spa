@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-const retrieveRecord = () => ({})
-
+import { retrieveRecord } from '../../services/record/actions';
 export class RecordPage extends React.Component {
     static propTypes = {
 
@@ -11,7 +9,7 @@ export class RecordPage extends React.Component {
 
     componentDidMount(){
         const recordID = this.props.match.params.id;
-        // this.props.retrieveRecord(recordID);
+        this.props.retrieveRecord(recordID);
     }
 
     componentWillUnmount(){
@@ -21,14 +19,19 @@ export class RecordPage extends React.Component {
     render(){
         return(
             <div>
-                Record
+                <h1>Record</h1>
+                <h2>{ this.props.title }</h2>
             </div>
         )
     }
 };
 
+const mapStateToProps = ({ record }) => ({
+    title: record.uri,
+})
+
 const mapDispatchToProps = {
     retrieveRecord,
 }
 
-export default connect(null, mapDispatchToProps)(RecordPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RecordPage);
