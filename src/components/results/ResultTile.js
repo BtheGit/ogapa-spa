@@ -1,7 +1,9 @@
 import React from 'react';
 
-export const ResultTile = () => (
-    <div>ResultTile</div>
+export const ResultTile = ({
+    title
+}) => (
+    <div>{ title }</div>
 )
 
 export default ResultTile;

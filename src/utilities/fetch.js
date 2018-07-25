@@ -1,11 +1,15 @@
 import axios from 'axios';
 import queryString from 'query-string';
+import mockdata from './mockdata.json';
 
 const BASE_RESOURCES_URL = 'http://ec2-18-207-9-100.compute-1.amazonaws.com:8010/v1/search?'
 const DEFAULT_RESOURCES_PARAMS = { q: '', from: 0 };
 
 // Stub for future validation
 export const validateParams = params => {
+    if(typeof params === 'string'){
+        params = queryString.parse(params);
+    }
     return params;
 }
 
@@ -18,7 +22,9 @@ export const fetchResources = params => {
     const validatedParams = validateParams(params);
     const queryString = generateQueryString(validatedParams);
     const url = BASE_RESOURCES_URL + queryString;
-    return executeFetchResources(url);
+    console.log(url)
+    // return executeFetchResources(url);
+    return mockFetch();
 }
 
 export const executeFetchResources = url => {
@@ -29,3 +35,7 @@ export const executeFetchResources = url => {
         responseType: 'json',
     })
 };
+
+const mockFetch = () => {
+    return Promise.resolve(mockdata);
+}

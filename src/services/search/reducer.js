@@ -10,7 +10,10 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case LOAD_SEARCH_RESULTS:
-            return state;
+            return {
+                ...state,
+                searchResults: action.payload
+            };
         case CLEAR_SEARCH_RESULTS:
             return state;
         default:

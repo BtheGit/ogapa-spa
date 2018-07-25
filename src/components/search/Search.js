@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import SearchForm from './SearchForm';
 import { updateFormField } from '../../services/form/actions';
-import { submitSearch } from '../../services/api/actions';
+import { navigateToSearchPage } from '../../services/api/actions';
 
 export class Search extends React.Component {
     searchbarOnChange = e => {
@@ -12,7 +12,7 @@ export class Search extends React.Component {
 
     searchbarOnSubmit = e => {
         e.preventDefault();
-        this.props.submitSearch({
+        this.props.navigateToSearchPage({
             q: this.props.value,
         })
     }
@@ -38,7 +38,7 @@ const mapStateToProps = ({ form }) => ({
 
 const mapDispatchToProps = {
     updateFormField,
-    submitSearch,
+    navigateToSearchPage,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

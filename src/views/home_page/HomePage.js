@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Search from '../../components/search/Search';
 
 export class HomePage extends React.Component {

@@ -14,7 +14,11 @@ const reducer = (state = initialState, action) => {
         case START_FETCH:
             return state;
         case FETCH_ERROR:
-            return state;
+            return {
+                ...state,
+                fetchError: action.payload,
+                isFetching: false,
+            };
         default:
             return state;
     }

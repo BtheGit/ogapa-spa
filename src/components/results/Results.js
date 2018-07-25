@@ -1,10 +1,17 @@
 import React from 'react';
 import ResultTile from './ResultTile';
+import { connect } from 'react-redux';
 
-export const Results = () => (
+export const Results = ({ results }) => (
     <div className="results__container">
-        <ResultTile />
+    { 
+        results.map((result) => <ResultTile key={ result.uri } title={ result.uri } />) 
+        }
     </div>
 )
 
-export default Results;
+const mapStateToProps = ({ search }) => ({
+    results: (search.searchResults && search.searchResults.results) || [],
+})
+
+export default connect(mapStateToProps)(Results);
