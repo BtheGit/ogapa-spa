@@ -5,7 +5,7 @@ export const SearchBar = ({
     placeholder,
     value,
 }) => (
-    <input type="text" value={ value } onChange={ onChange } aria-label="Input search text here" placeholder={ placeholder } />
+    <input className="search__input" type="text" value={ value } onChange={ onChange } aria-label="Input search text here" placeholder={ placeholder } />
 )
 
 export default SearchBar;
