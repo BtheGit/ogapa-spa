@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
+import "./ResultsTable.css";
 
 class ResultsTable extends React.Component {
     static propTypes = {
@@ -42,38 +43,40 @@ class ResultsTable extends React.Component {
 
     render(){
         return(
-            <table>
-                <thead>
-                    <tr>
+            <div className="results__table-container">
+                <table className="results__table">
+                    <thead className="table__head">
+                        <tr className="table__row table__row--head">
+                            {
+                                this.columns.map(column => (
+                                    <th className="table__cell table__cell--head">
+                                        <p>{ column.Header }</p>
+                                    </th>
+                                ))
+                            }
+                        </tr>
+                    </thead>
+                    <tbody className="table__body">
                         {
-                            this.columns.map(column => (
-                                <th>
-                                    <p>{ column.Header }</p>
-                                </th>
+                            this.props.results.map(result => (
+                                <tr className="table__row table__row--body">
+                                    {
+                                        this.columns.map(column => (
+                                            <td className="table__cell table__cell--body">
+                                                {
+                                                    column.Cell 
+                                                        ? column.Cell(result[column.accessor])
+                                                        : result[column.accessor]
+                                                }
+                                            </td>
+                                        ))
+                                    }
+                                </tr>
                             ))
                         }
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        this.props.results.map(result => (
-                            <tr>
-                                {
-                                    this.columns.map(column => (
-                                        <td>
-                                            {
-                                                column.Cell 
-                                                    ? column.Cell(result[column.accessor])
-                                                    : result[column.accessor]
-                                            }
-                                        </td>
-                                    ))
-                                }
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }

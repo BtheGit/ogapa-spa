@@ -6,6 +6,7 @@ import Results from '../../components/results/Results';
 import {
     submitSearch,
 } from '../../services/api/actions';
+import './SearchPage.css';
 
 export class SearchPage extends React.Component {
     static propTypes = {
@@ -33,7 +34,7 @@ export class SearchPage extends React.Component {
 
     render(){
         return(
-            <div>
+            <div className="search-page">
                 <Search />
                 <Results />
             </div>

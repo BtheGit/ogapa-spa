@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import SearchForm from './SearchForm';
 import { updateFormField } from '../../services/form/actions';
 import { navigateToSearchPage } from '../../services/api/actions';
+import './Search.css';
 
 export class Search extends React.Component {
     searchbarOnChange = e => {
@@ -20,12 +21,12 @@ export class Search extends React.Component {
     render(){
         return (
             <div className="search__container">
-                <h1>HHS - OGAPA Grants Search Tool</h1>
+                <h1>HHS - Award Search</h1>
                 <SearchForm
                     onChange={ this.searchbarOnChange }
                     onSubmit={ this.searchbarOnSubmit }
                     value={ this.props.value }
-                    placeholder="Search for grants here..."
+                    placeholder="Search by keyword..."
                 />
             </div>
         );
