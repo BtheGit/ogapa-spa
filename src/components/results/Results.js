@@ -1,10 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ResultTile from './ResultTile';
+import PropTypes from 'prop-types';
+import ResultsTable from './ResultsTable';
 import Pager from './Pager';
 import { navigateToSearchPage } from '../../services/api/actions';
 
 export class Results extends React.Component {
+    static propTypes = {
+        metadata: PropTypes.object.isRequired,
+        results: PropTypes.array.isRequired,
+    }
+
+    static defaultProps = {
+        metadata: {},
+        results: [],
+    }
+
     onClick = (from, isCurrent) => e => {
         e.preventDefault();
         if(!isCurrent){
@@ -17,11 +28,11 @@ export class Results extends React.Component {
 
     render(){
         const { 
-            results = [], 
             total,
-            pageSize,
-            startFrom,
-        } = this.props;
+            "page-length": pageSize,
+            start: startFrom,
+        } = this.props.metadata;
+        const { results } = this.props;
         return (
             <div className="results__container">
                 {
@@ -34,14 +45,7 @@ export class Results extends React.Component {
                             onClick={ this.onClick }
                         />
                 }
-                {
-                    results.length &&
-                        <div className="results__tiles">
-                        { 
-                            results.map((result) => <ResultTile key={ result.uri } title={ result.uri } id={ result.uri } />) 
-                        }
-                        </div>
-                }
+                <ResultsTable results={ results }/>
             </div>
         )
     }
@@ -49,11 +53,9 @@ export class Results extends React.Component {
 
 
 const mapStateToProps = ({ search }) => ({
-    total: search.total,
-    pageSize: search['page-length'],
-    startFrom: search.start,
+    metadata: search.metadata,
     results: search.results,
-    searchText: search.qtext,
+    searchText: search.metadata && search.metadata.qtext,
 })
 
 const mapDispatchToProps = {
