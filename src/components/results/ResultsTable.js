@@ -48,8 +48,8 @@ class ResultsTable extends React.Component {
                     <thead className="table__head">
                         <tr className="table__row table__row--head">
                             {
-                                this.columns.map(column => (
-                                    <th className="table__cell table__cell--head">
+                                this.columns.map((column, idx) => (
+                                    <th className="table__cell table__cell--head" key={ idx }>
                                         <p>{ column.Header }</p>
                                     </th>
                                 ))
@@ -58,11 +58,11 @@ class ResultsTable extends React.Component {
                     </thead>
                     <tbody className="table__body">
                         {
-                            this.props.results.map(result => (
-                                <tr className="table__row table__row--body">
+                            this.props.results.map((result, idx) => (
+                                <tr className="table__row table__row--body" key={ idx }>
                                     {
-                                        this.columns.map(column => (
-                                            <td className="table__cell table__cell--body">
+                                        this.columns.map((column, idx) => (
+                                            <td className="table__cell table__cell--body" key={ idx }>
                                                 {
                                                     column.Cell 
                                                         ? column.Cell(result[column.accessor])
