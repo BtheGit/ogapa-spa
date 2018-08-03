@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ResultsTable from './ResultsTable';
 import Pager from './Pager';
+import Spinner from '../spinner/Spinner';
 import { navigateToSearchPage } from '../../services/api/actions';
-
+import './Results.css';
 export class Results extends React.Component {
     static propTypes = {
         metadata: PropTypes.object.isRequired,
@@ -16,12 +17,12 @@ export class Results extends React.Component {
         results: [],
     }
 
-    onClick = (from, isCurrent) => e => {
+    onClick = (start, isCurrent) => e => {
         e.preventDefault();
         if(!isCurrent){
             this.props.navigateToSearchPage({
                 q: this.props.searchText,
-                from,
+                start,
             })
         }
     }
@@ -36,23 +37,38 @@ export class Results extends React.Component {
         return (
             <div className="results__container">
                 {
-                    results.length && 
-                        <Pager
-                            total={ total }
-                            pageSize={ pageSize }
-                            startFrom={ startFrom }
-                            resultsSize={ results.length }
-                            onClick={ this.onClick }
-                        />
+                    results.length 
+                        ? 
+                            <React.Fragment>
+                                <Pager
+                                    total={ total }
+                                    pageSize={ pageSize }
+                                    startFrom={ startFrom }
+                                    resultsSize={ results.length }
+                                    onClick={ this.onClick }
+                                />
+                                <ResultsTable results={ results }/>
+                            </React.Fragment>
+                        : 
+                            null
+                    }
+                {
+                    !results.length && !this.props.isFetching
+                        ?
+                            <div className="results__no-results">No Results Found</div>
+                        :
+                            null
+
                 }
-                <ResultsTable results={ results }/>
+                <Spinner active={ this.props.isFetching }/>
             </div>
         )
     }
 }
 
 
-const mapStateToProps = ({ search }) => ({
+const mapStateToProps = ({ search, api }) => ({
+    isFetching: api.isFetching,
     metadata: search.metadata,
     results: search.results,
     searchText: search.metadata && search.metadata.qtext,

@@ -28,13 +28,17 @@
 
 .table__cell {
     padding: 8px;
+    padding-left: 15px;
     text-align: left;
-    width: 200px;
+    min-width: 190px;
     word-wrap: break-word;
 }
 
-.table__cell:nth-child(1){
-    
+.table__cell:nth-child(6){
+    min-width: 110px;
+}
+.table__cell:nth-child(7){
+    min-width: 150px;
 }
 
 .table__cell--head {
