@@ -48,6 +48,11 @@
     background: #b2dffa;
 }
 
+.pager__num.pager__ellipses:hover{
+    background: white;
+    cursor: default;
+}
+
 .pager__num--active {
     background: #169bd5;
     color: white;
