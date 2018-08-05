@@ -1,17 +1,23 @@
 .search__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background: white;
+    box-shadow: 0 0 15px -5px rgba(0,0,0,0.4);
 }
 
-.search__container h1 {
-    margin: 15px auto;
+.search__container h1 { 
+    width: 100%;
+    padding: 15px 0;
+    padding-left: 20px;
+    background: #4a4a4a;
+    color: #EEE;
+    font-weight: normal;
 }
 
 form {
     width: 80%;
+    max-width: 800px;
+    padding: 20px 0;
     margin: 0 auto;
+    padding-left: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -26,27 +32,35 @@ label {
 
 .search__input {
     flex: 3 1 auto;
-    height: 40px;
-    font-size: 18px;
+    height: 50px;
+    font-size: 20px;
     padding-left: 10px;
+    border: none;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    border-bottom: 1px solid #999;
 }
 
 .search__submit {
     width: 100%;
-    height: 40px;
+    max-width: 60px;
+    height: auto;
     font-size: 18px;
-    color: white;
-    background: #0071bc;
     cursor: pointer;
+    border: none;
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
 }
 
-.search__submit:hover {
-    background: #205493;
+.search__submit:hover svg {
+    stroke: black;
 }
 
 @media screen and (min-width: 700px){
     form {
         flex-direction: row;
+        margin: 0 0;
     }
 
     .search__input {
