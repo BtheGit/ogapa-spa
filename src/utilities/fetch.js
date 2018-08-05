@@ -58,7 +58,7 @@ export const fetchResources = params => {
         headers: {
             // Origin: '',
             "Access-Control-Allow-Origin": 'cors',
-            Authorization: "Basic YWRtaW46aS0wM2QzODYxZDA2ZTI2ZGE0ZA==",
+            Authorization: `Basic ${ process.env.REACT_APP_API_KEY }`,
             "Cache-Control": "no-cache"            
         }
     })
@@ -73,7 +73,7 @@ export const fetchFullResources = ids => {
         headers: {
             Accept: `multipart/mixed; boundary=${ BOUNDARY_FLAG }`,
             "Access-Control-Allow-Origin": 'cors',
-            Authorization: "Basic YWRtaW46aS0wM2QzODYxZDA2ZTI2ZGE0ZA==",
+            Authorization: `Basic ${ process.env.REACT_APP_API_KEY }`,
             "Cache-Control": "no-cache"            
         }
     })
