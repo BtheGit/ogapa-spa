@@ -1,11 +1,16 @@
 import axios from 'axios';
 import queryString from 'query-string';
-import mockdata from './mockdata.json';
+// import mockdata from './mockdata.js';
 
-const BASE_URL = 'http://ec2-18-207-9-100.compute-1.amazonaws.com:8010';
-const BASE_RESOURCES_URL = BASE_URL + '/v1/search?';
-const BASE_RECORD_URL = BASE_URL + '/v1/documents?uri=';
-const DEFAULT_RESOURCES_PARAMS = { q: '', from: 0 };
+// const BASE_URL = 'http://ec2-18-207-9-100.compute-1.amazonaws.com:8010';
+const BASE_URL = 'https://cors-anywhere.herokuapp.com/http://ec2-18-207-9-100.compute-1.amazonaws.com:8010/v1'; // With CORS Proxy
+// const BASE_URL = 'http://localhost:8080/http://ec2-18-207-9-100.compute-1.amazonaws.com:8010/v1'; // With CORS Proxy
+const BASE_RESOURCES_URL = BASE_URL + '/search?';
+const BASE_RECORD_URL = BASE_URL + '/documents?uri=';
+const DEFAULT_RESOURCES_PARAMS = { q: '', start: 1, format: 'json', pageLength: 20 };
+
+// For parsing multipart objects
+export const BOUNDARY_FLAG = 'BOUNDARY';
 
 // Stub for future validation
 export const validateParams = params => {
@@ -17,37 +22,79 @@ export const validateParams = params => {
 
 export const generateQueryString = (params, defaultParams = DEFAULT_RESOURCES_PARAMS) => {
     const fullParams = { ...defaultParams, ...params };
-    return queryString.stringify(fullParams);
+    if(fullParams.q && typeof fullParams.q === 'string'){
+        const text = fullParams.q;
+        const lowerCase = text.toLowerCase();
+        fullParams.q = lowerCase;
+    }
+    const stringified = queryString.stringify(fullParams);
+    return stringified;
 }
 
+export const convertMultipartToObject = blob => {
+    const partsWithMetaData = blob.split(BOUNDARY_FLAG)
+    const partsWithoutHeaders = partsWithMetaData.reduce((acc, curr) => {
+        const startIndex = curr.indexOf('{');
+        const endIndex = curr.lastIndexOf('}');
+        if(startIndex === -1 || endIndex === -1){
+            // No valid JSON found
+            return acc;
+        }
+        const jsonString = curr.substr(startIndex, (endIndex - startIndex) + 1);
+        return [ ...acc, jsonString ];
+    }, [])
+    return partsWithoutHeaders;
+}
+
+// AJAX METHODS
 export const fetchResources = params => {
     const validatedParams = validateParams(params);
     const queryString = generateQueryString(validatedParams);
     const url = BASE_RESOURCES_URL + queryString;
-    console.log(url)
-    // return executeFetch(url);
-    return mockResourcesFetch();
+    return axios({
+        url,
+        method: 'get',
+        responseType: 'json',
+        headers: {
+            // Origin: '',
+            "Access-Control-Allow-Origin": 'cors',
+            Authorization: "Basic YWRtaW46aS0wM2QzODYxZDA2ZTI2ZGE0ZA==",
+            "Cache-Control": "no-cache"            
+        }
+    })
+}
+
+export const fetchFullResources = ids => {
+    const uris = ids.join('&uri=');
+    const url = `${ BASE_RECORD_URL }${ uris }`;
+    return axios({
+        url,
+        method: 'get',
+        headers: {
+            Accept: `multipart/mixed; boundary=${ BOUNDARY_FLAG }`,
+            "Access-Control-Allow-Origin": 'cors',
+            Authorization: "Basic YWRtaW46aS0wM2QzODYxZDA2ZTI2ZGE0ZA==",
+            "Cache-Control": "no-cache"            
+        }
+    })
 }
 
 export const fetchRecord = recordID => {
     const url = BASE_RECORD_URL + recordID;
-    // return executeFetch(url);
-    return mockRecordFetch();
-}
-
-export const executeFetch = url => {
+    // return mockRecordFetch();
     return axios({
         url,
         method: 'get',
-        timeout: 10000,
         responseType: 'json',
+        headers: {
+            // Origin: '',
+            "Access-Control-Allow-Origin": 'cors',
+            Authorization: "Basic YWRtaW46aS0wM2QzODYxZDA2ZTI2ZGE0ZA==",
+            "Cache-Control": "no-cache"            
+        }
     })
-};
-
-const mockResourcesFetch = () => {
-    return Promise.resolve(mockdata);
 }
 
-const mockRecordFetch = () => {
-    return Promise.resolve(mockdata.results[0]);
-}
+// const mockRecordFetch = () => {
+//     return Promise.resolve(mockdata.record);
+// }

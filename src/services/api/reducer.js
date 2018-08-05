@@ -1,6 +1,7 @@
 import {
     START_FETCH,
     FETCH_ERROR,
+    END_FETCH,
 } from './actions';
 
 const initialState = {
@@ -12,7 +13,16 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case START_FETCH:
-            return state;
+            return {
+                ...state,
+                isFetching: true,
+                fetchId: action.payload,
+            }
+        case END_FETCH:
+            return {
+                ...state,
+                isFetching: false,
+            }
         case FETCH_ERROR:
             return {
                 ...state,
