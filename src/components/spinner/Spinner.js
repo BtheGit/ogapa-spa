@@ -8,7 +8,12 @@ const Spinner = ({ active }) => {
 
     return (
         <div className="spinner-overlay">
-            <div className="spinner-container"/>
+            <div class="spinner slabs" id="slabs">
+                <div class="slab"></div>
+                <div class="slab"></div>
+                <div class="slab"></div>
+                <div class="slab"></div>
+            </div>
         </div>
     )
 }

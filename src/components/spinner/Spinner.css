@@ -12,22 +12,35 @@
     user-select: none;
 }
 
-.spinner-container {
-    height: 50px;
-    width: 50px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 50%;
-    animation: spinner 1s infinite;
-}
-
-@keyframes spinner {
-    0%, 100% {
-        height: 50px;
-        width: 50px;
-    }
-    
-    50% {
-        height: 75px;
-        width: 75px;
-    }
-}
+@keyframes slabMove {
+    0% { transform: translateY(0) rotateX(30deg); opacity: 0; }
+    10% { transform: translateY(-48%); opacity: 1; }
+    90% { transform: translateY(-422%); opacity: 0.1; }
+    100% { transform: translateY(-480%); opacity: 0; }
+  }
+  
+  .spinner.slabs {
+    width: 4em;
+    height: 4em;
+    transform: perspective(15em) rotateX(65deg) rotateZ(-30deg);
+    transform-style: preserve-3d;
+  }
+  
+  .spinner.slabs .slab {
+    position: absolute;
+    width: 4em;
+    height: 4em;
+    background: gray;
+    opacity: 0;
+    box-shadow: -0.08em 0.15em 0 rgb(55, 55, 55);
+    transform-origin: 50% 0%;
+    animation: slabMove 4s linear infinite;
+  }
+  
+  .spinner.slabs .slab:nth-child(1) { -webkit-animation-delay: 0s; animation-delay: 0s; }
+  .spinner.slabs .slab:nth-child(2) { -webkit-animation-delay: 1s; animation-delay: 1s; }
+  .spinner.slabs .slab:nth-child(3) { -webkit-animation-delay: 2s; animation-delay: 2s; }
+  .spinner.slabs .slab:nth-child(4) { -webkit-animation-delay: 3s; animation-delay: 3s; }
+  
+  
+  
