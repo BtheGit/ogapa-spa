@@ -1,3 +1,8 @@
+.record__container {
+    background: #EEE;
+    height: 100%;
+}
+
 .record__header {
     width: 100%;
     display: flex;
@@ -6,7 +11,6 @@
     background: #4a4a4a;
     padding: 0 20px;
     box-shadow: 0 0 15px -3px rgba(0,0,0,0.6);
-
 }
 
 .record__header h1 {
@@ -23,6 +27,7 @@
 .record__main {
     display: flex;
     flex-wrap: wrap;
+    background: white;
 }
 
 .record__main h2 {

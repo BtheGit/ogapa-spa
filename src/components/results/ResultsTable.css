@@ -1,10 +1,12 @@
 .results__table-container {
     overflow-x: scroll;
+    margin: 0 20px;
+    border: 1px solid #EEE;
 }
 
 .results__table {
     width: 100%;
-    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(220,220,220);
 }
 
 .table__head {}
@@ -14,13 +16,16 @@
     /* display: flex; */
 }
 .table__row--head {
-    background: rgba(0,0,0,0.2);
+    color: white;
+    background: rgba(0,0,0,0.6);
 }
 
-.table__row--body {}
+.table__row--body {
+    background: white;
+}
 
 .table__row--body:nth-child(even) {
-    background: rgba(0,0,0,0.1);
+    background: rgb(240,240,240);
 }
 
 .table__body {}
@@ -46,4 +51,5 @@
     padding-bottom: 12px;
 }
 
-.table__cell--body {}
+.table__cell--body {
+}

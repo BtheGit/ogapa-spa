@@ -6,7 +6,9 @@ import Spinner from '../../components/spinner/Spinner';
 import './RecordPage.css';
 export class RecordPage extends React.Component {
     static propTypes = {
-
+        record: PropTypes.object,
+        isFetching: PropTypes.bool.isRequired,
+        retrieveRecord: PropTypes.func.isRequired,
     }
 
     componentDidMount(){
@@ -14,13 +16,9 @@ export class RecordPage extends React.Component {
         this.props.retrieveRecord(recordID);
     }
 
-    componentWillUnmount(){
-
-    }
-
     render(){
         return(
-            <div>
+            <div className="record__container">
                 {
                     (this.props.record && this.props.record["award_id_piid"]) && !this.props.isFetching
                         ?
@@ -29,7 +27,7 @@ export class RecordPage extends React.Component {
                                 <h1>Contract Summary</h1>
                                 <p>{ this.props.record['award_id_piid']}</p>
                             </header>
-                            <main className="record__main">
+                            <main className="record__main page-container">
                                 <div className="record__award">
                                     <h2>Award <span>({ this.props.record['award_id_piid']})</span></h2>
                                     <p>Award Description: { this.props.record['award_description'] }</p>

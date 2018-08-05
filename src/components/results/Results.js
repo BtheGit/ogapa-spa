@@ -35,7 +35,7 @@ export class Results extends React.Component {
         } = this.props.metadata;
         const { results } = this.props;
         return (
-            <div className="results__container">
+            <div className="results__container page-container">
                 {
                     results.length 
                         ? 

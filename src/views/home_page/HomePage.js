@@ -1,31 +1,11 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import Search from '../../components/search/Search';
+import './HomePage.css';
 
 export class HomePage extends React.Component {
-    static propTypes = {
-
-    }
-
-    static defaultProps = {
-
-    }
-
-    componentDidMount(){
-
-    }
-
-    componentDidUpdate(){
-
-    }
-
-    componentWillUnmount(){
-
-    }
-
     render(){
         return(
-            <div>
+            <div className="home__container">
                 <Search />
             </div>
         )

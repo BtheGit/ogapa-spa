@@ -1,7 +1,8 @@
 .results__container {
     position: relative;
+    padding-top: 5px;
+    background: white;
 }
-
 
 .results__no-results {
     width: 100%;

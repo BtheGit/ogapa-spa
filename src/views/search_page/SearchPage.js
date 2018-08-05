@@ -28,10 +28,6 @@ export class SearchPage extends React.Component {
         }
     }
 
-    componentWillUnmount(){
-
-    }
-
     render(){
         return(
             <div className="search-page">
