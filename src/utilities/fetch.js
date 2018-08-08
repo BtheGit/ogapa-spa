@@ -2,9 +2,10 @@ import axios from 'axios';
 import queryString from 'query-string';
 // import mockdata from './mockdata.js';
 
-// const BASE_URL = 'http://ec2-18-207-9-100.compute-1.amazonaws.com:8010';
+// const BASE_URL = 'http://ec2-18-207-9-100.compute-1.amazonaws.com:8010/v1';
 const BASE_URL = 'https://cors-anywhere.herokuapp.com/http://ec2-18-207-9-100.compute-1.amazonaws.com:8010/v1'; // With CORS Proxy
 // const BASE_URL = 'http://localhost:8080/http://ec2-18-207-9-100.compute-1.amazonaws.com:8010/v1'; // With CORS Proxy
+// const BASE_URL = 'http://localhost:8010/v1'; // Same EC2 Instance
 const BASE_RESOURCES_URL = BASE_URL + '/search?';
 const BASE_RECORD_URL = BASE_URL + '/documents?uri=';
 const DEFAULT_RESOURCES_PARAMS = { q: '', start: 1, format: 'json', pageLength: 20 };
@@ -58,7 +59,7 @@ export const fetchResources = params => {
         headers: {
             // Origin: '',
             "Access-Control-Allow-Origin": 'cors',
-            Authorization: `Basic ${ process.env.REACT_APP_API_KEY }`,
+            Authorization: `Basic YWRtaW46aS0wM2QzODYxZDA2ZTI2ZGE0ZA==`,
             "Cache-Control": "no-cache"            
         }
     })
@@ -73,7 +74,7 @@ export const fetchFullResources = ids => {
         headers: {
             Accept: `multipart/mixed; boundary=${ BOUNDARY_FLAG }`,
             "Access-Control-Allow-Origin": 'cors',
-            Authorization: `Basic ${ process.env.REACT_APP_API_KEY }`,
+            Authorization: `Basic YWRtaW46aS0wM2QzODYxZDA2ZTI2ZGE0ZA==`,
             "Cache-Control": "no-cache"            
         }
     })
